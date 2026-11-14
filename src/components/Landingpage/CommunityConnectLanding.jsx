@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import heroImage from "../../assets/hero/community-connect-hero.png";
 import creatorProfileImage from "../../assets/hero/Creator Profile.png";
 import serviceVideoIcon from "../../assets/icons/6.png";
 import serviceDesignIcon from "../../assets/icons/7.png";
@@ -23,7 +22,7 @@ import femaleClientImage from "../../assets/icons/29.webp";
 import processSearchIcon from "../../assets/icons/22.png";
 import processDeliveryIcon from "../../assets/icons/26.png";
 import processReviewIcon from "../../assets/icons/27.png";
-import freelancerIcon from "../../assets/icons/1.png";
+import freelancerIcon from "../../assets/icons/2.png";
 import clientIcon from "../../assets/icons/3.png";
 import secureIcon from "../../assets/icons/4.png";
 import arjunCreatorPhoto from "../../assets/featured_creator_photos/Arjun_Verma.png";
@@ -43,6 +42,7 @@ import {
   Globe2,
   Headset,
   Instagram,
+  Layers,
   Layout,
   Link as LinkIcon,
   Linkedin,
@@ -53,7 +53,6 @@ import {
   PenTool,
   Phone,
   Play,
-  Search,
   ShieldCheck,
   Star,
   Target,
@@ -86,11 +85,10 @@ const serviceCategories = [
   { name: "More Services", image: serviceMoreIcon, description: "Find the right specialist for your next idea." },
 ];
 
-const popularSearches = ["Photography", "Video Editing", "Website Development", "Content Writing", "SEO"];
 const stats = [
   { label: "1000+ Verified Freelancers", image: freelancerIcon },
   { label: "500+ Happy Clients", image: clientIcon },
-  { label: "50+ Service Categories", image: serviceAnimationIcon },
+  { label: "50+ Service Categories", Icon: Layers },
   { label: "Trusted & Secure Platform", image: secureIcon },
 ];
 const creatorCards = [
@@ -147,7 +145,7 @@ function Header({ settings }) {
         <Link to="/" className="flex min-w-0 shrink-0 items-center gap-3">
           <img src={logo} alt="Scholars Mediatech logo" className="h-[58px] w-[68px] shrink-0 object-contain sm:h-[74px] sm:w-[94px]" />
           <div className="min-w-0">
-            <div className="truncate text-[12px] font-extrabold uppercase tracking-[0.04em] text-[#101b3d] sm:text-sm xl:text-base 2xl:text-lg">
+            <div className="truncate text-[12px] font-extrabold tracking-[0.04em] text-[#101b3d] sm:text-sm xl:text-base 2xl:text-lg">
               {companyNameParts ? (
                 <>
                   {companyNameParts[1]}
@@ -157,8 +155,7 @@ function Header({ settings }) {
               ) : companyName}
             </div>
             <div className="mt-1 text-[8px] font-semibold uppercase leading-[1.35] tracking-[0.025em] text-slate-600 sm:text-[9px] xl:text-[10px]">
-              <span className="block whitespace-nowrap">Building Your Creativity</span>
-              <span className="block whitespace-nowrap">Connect Your Community</span>
+              <span className="block whitespace-nowrap">Freelancer Marketplace &amp; Digital Services Platform</span>
             </div>
           </div>
         </Link>
@@ -228,52 +225,20 @@ function Header({ settings }) {
   );
 }
 
-function SearchBar({ searchTerm, setSearchTerm, onSearch }) {
-  return (
-    <div>
-      <div className="flex flex-col gap-2 rounded-[18px] border border-[#dbe7f6] bg-white p-2 shadow-[0_16px_40px_rgba(25,75,125,0.12)] sm:flex-row sm:items-center">
-        <div className="flex min-h-12 flex-1 items-center gap-3 rounded-xl px-3 text-slate-500 sm:px-4">
-          <Search size={18} className="text-[#089eaa]" />
-          <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} onKeyDown={(event) => event.key === "Enter" && onSearch()} placeholder="Search services, creators or skills (e.g. photography, web design, video editing...)" className="w-full border-0 bg-transparent text-sm text-slate-800 outline-none placeholder:text-slate-500" aria-label="Search services, creators or skills" />
-        </div>
-        <button type="button" onClick={onSearch} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#089eaa] px-6 text-sm font-semibold text-white transition hover:bg-[#078b96]">Search <ArrowRight size={16} /></button>
-      </div>
-      <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] font-medium text-slate-600">
-        <span className="mr-1 font-semibold text-[#14213d]">Popular Searches:</span>
-        {popularSearches.map((item) => (
-          <button key={item} type="button" onClick={() => { setSearchTerm(item); onSearch(item); }} className="rounded-full bg-[#f0f2ff] px-3 py-1.5 text-[#14213d] transition hover:bg-[#e3e8ff] hover:text-[#089eaa]">{item}</button>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function HeroSection() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [query, setQuery] = useState("");
   useEffect(() => {
-    const handleServiceSearch = (event) => {
-      setSearchTerm(event.detail);
-      setQuery(event.detail);
-      document.getElementById("home")?.scrollIntoView({ behavior: "smooth" });
+    const handleServiceSearch = () => {
+      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
     };
     window.addEventListener("community-connect-search", handleServiceSearch);
     return () => window.removeEventListener("community-connect-search", handleServiceSearch);
   }, []);
 
-  const matches = useMemo(() => {
-    if (!query.trim()) return serviceCategories;
-    const normalized = query.trim().toLowerCase();
-    return serviceCategories.filter((service) => service.name.toLowerCase().includes(normalized));
-  }, [query]);
-
   return (
-    <section id="home" className="relative overflow-hidden bg-[linear-gradient(115deg,#f7f6ff_0%,#f4fbff_46%,#e9f9ff_100%)] px-4 pb-8 pt-8 sm:px-6 lg:px-8 lg:pt-10">
-      <div className="pointer-events-none absolute -left-24 top-1/3 h-56 w-56 rounded-full bg-[#dceaff] opacity-70 blur-3xl" />
-      <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 rounded-full bg-[#c4f5ff] opacity-60 blur-3xl" />
+    <section id="home" className="cc-home-hero relative overflow-hidden bg-[linear-gradient(115deg,#f7f6ff_0%,#f4fbff_46%,#e9f9ff_100%)] px-4 pb-8 pt-8 sm:px-6 lg:px-8 lg:pt-10">
       <div className="relative mx-auto max-w-7xl">
-        <div className="grid items-center gap-5 lg:grid-cols-[1.03fr_0.97fr] lg:gap-2">
-          <div className="relative z-10 py-4 lg:py-6">
+        <div className="cc-home-grid grid items-center gap-5 lg:grid-cols-[1.03fr_0.97fr] lg:gap-2">
+          <div className="cc-home-copy relative z-10 py-4 lg:py-6">
             <div className="mb-5 inline-flex items-center rounded-full bg-[#e6edff] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.17em] text-[#14213d] sm:text-xs">
               CREATE <span className="mx-2 text-[#c68a22]">•</span> CONNECT <span className="mx-2 text-[#c68a22]">•</span> GROW
             </div>
@@ -291,31 +256,17 @@ function HeroSection() {
                 Hire Talent (Client)
               </a>
             </div>
-            <div className="cc-hero-search mt-5 max-w-[700px]">
-              <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} onSearch={(next) => setQuery(next || searchTerm)} />
-            </div>
-            {query && (
-              <div className="mt-3 text-sm text-slate-600" role="status">
-                {matches.length
-                  ? `Matching service categories: ${matches.map((service) => service.name).join(", ")}`
-                  : `No matching service categories found for ?${query}?.`}
-              </div>
-            )}
-          </div>
-
-          <div className="relative mx-auto w-full max-w-[760px] lg:-mr-4">
-            <img
-              src={heroImage}
-              alt="Photographers, content creators, designers, and developers working together"
-              className="relative z-10 block h-auto w-full object-contain"
-            />
           </div>
         </div>
 
         <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-[22px] border border-white bg-white/90 py-2 shadow-[0_15px_40px_rgba(32,88,143,0.12)] backdrop-blur lg:mt-3 lg:grid-cols-4">
-          {stats.map(({ label, image }, index) => (
+          {stats.map(({ label, image, Icon }, index) => (
             <div key={label} className={`flex min-h-[76px] min-w-0 items-center gap-2 px-2.5 py-3 sm:gap-4 sm:px-5 lg:px-8 ${index > 1 ? "border-t border-slate-200 lg:border-t-0" : ""} ${index % 2 === 1 ? "border-l border-slate-200 lg:border-l" : ""} ${index > 0 && index % 2 === 0 ? "lg:border-l lg:border-slate-200" : ""}`}>
-              <img src={image} alt="" aria-hidden="true" className="h-8 w-8 shrink-0 object-contain sm:h-10 sm:w-10" />
+              {image ? (
+                <img src={image} alt="" aria-hidden="true" className="h-8 w-8 shrink-0 object-contain sm:h-10 sm:w-10" />
+              ) : (
+                <Icon size={34} strokeWidth={1.8} className="shrink-0 text-[#f4d276]" aria-hidden="true" />
+              )}
               <div className="min-w-0 text-xs font-semibold leading-4 text-[#14213d] sm:text-sm sm:leading-5 lg:text-base">{label}</div>
             </div>
           ))}

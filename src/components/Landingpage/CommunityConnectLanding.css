@@ -71,9 +71,14 @@
 }
 
 #home {
-  min-height: 470px;
-  padding: 28px 42px 18px;
-  background: linear-gradient(115deg, #fff8e9 0%, #fffdf7 52%, #f5e8c9 100%);
+  min-height: 0;
+  padding: 20px 42px 0;
+  background-image:
+    linear-gradient(90deg, #fff8e9 0%, #fff8e9 29%, rgb(255 248 233 / 94%) 42%, rgb(255 248 233 / 28%) 62%, rgb(5 20 43 / 8%) 100%),
+    url("../../assets/hero/home-editor-scene.webp");
+  background-position: center, right center;
+  background-repeat: no-repeat;
+  background-size: cover, auto 100%;
 }
 
 #home > .pointer-events-none,
@@ -86,13 +91,19 @@
 }
 
 #home > div.relative.mx-auto.max-w-7xl > div.grid {
-  min-height: 345px;
-  grid-template-columns: 0.94fr 1.06fr;
-  gap: 12px;
+  min-height: 360px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
 }
 
 #home > div.relative.mx-auto.max-w-7xl > div.grid > div:first-child {
   padding-top: 20px;
+}
+
+#home .cc-home-copy {
+  width: min(58%, 620px);
+  max-width: 620px;
+  padding-bottom: 24px;
 }
 
 #home > div.relative.mx-auto.max-w-7xl > div.grid > div:first-child > div:first-child {
@@ -110,7 +121,7 @@
   max-width: 620px;
   color: var(--cc-navy);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.35rem, 4vw, 3.65rem);
+  font-size: clamp(2.1rem, 3.8vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 0.99;
@@ -123,14 +134,20 @@
 }
 
 #home p {
-  max-width: 490px;
+  max-width: 475px;
   color: #17233b;
-  font-size: 16px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
 #home .cc-hero-actions a:first-child {
   background: linear-gradient(120deg, #f8d76e, #c28b22);
+}
+
+#home .cc-hero-actions a {
+  min-height: 40px;
+  padding: 8px 18px;
+  font-size: 13px;
 }
 
 #home .cc-hero-actions a:last-child {
@@ -138,45 +155,11 @@
   color: var(--cc-navy);
 }
 
-#home .cc-hero-search > div > div:first-child {
-  border-color: #e2d4b8;
-  border-radius: 12px;
-  padding: 4px;
-  box-shadow: 0 6px 18px rgb(72 53 21 / 10%);
-}
-
-#home .cc-hero-search > div > div:first-child > button {
-  min-height: 38px;
-  border-radius: 9px;
-  background: var(--cc-navy);
-}
-
-#home .cc-hero-search > div > div:nth-child(2) button {
-  min-height: 0;
-  background: #f0e5cc;
-  color: var(--cc-navy);
-}
-
-#home .cc-hero-search > div > div:first-child > div {
-  min-height: 38px;
-}
-
-#home .cc-hero-search > div + div {
-  margin-top: 7px;
-}
-
-#home .relative.mx-auto.w-full.max-w-\[760px\] {
-  max-width: 690px;
-}
-
-#home .relative.mx-auto.w-full.max-w-\[760px\] img {
-  filter: drop-shadow(0 13px 15px rgb(72 53 21 / 13%));
-}
-
 #home > div.relative.mx-auto.max-w-7xl > div.mt-5.grid {
-  margin-top: 4px;
+  min-height: 62px;
+  margin-top: 0;
   border: 1px solid #286a9c;
-  border-radius: 18px;
+  border-radius: 11px 11px 16px 16px;
   background: linear-gradient(110deg, #07518e, #062850 70%, #081f43);
   padding: 4px 0;
   box-shadow: 0 8px 17px rgb(6 38 76 / 18%);
@@ -844,7 +827,19 @@
   }
 
   #home > div.relative.mx-auto.max-w-7xl > div.grid {
-    grid-template-columns: 1fr 0.9fr;
+    min-height: 230px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #home .cc-home-copy {
+    width: min(58%, 430px);
+    padding-bottom: 12px;
+  }
+
+  #home {
+    padding-top: 14px;
+    padding-bottom: 8px;
+    background-size: cover, auto 100%;
   }
 
   #services .grid.gap-3 {
@@ -894,6 +889,20 @@
   #home > div.relative.mx-auto.max-w-7xl > div.grid {
     grid-template-columns: 1fr;
     gap: 5px;
+  }
+
+  #home {
+    background-image:
+      linear-gradient(180deg, #fff8e9 0%, rgb(255 248 233 / 95%) 48%, rgb(255 248 233 / 65%) 100%),
+      url("../../assets/hero/home-editor-scene.webp");
+    background-position: center, right bottom;
+    background-size: cover, auto 58%;
+  }
+
+  #home .cc-home-copy {
+    width: 100%;
+    max-width: none;
+    padding-bottom: 0;
   }
 
   #home > div.relative.mx-auto.max-w-7xl > div.grid > div:first-child {
@@ -1025,7 +1034,8 @@
   }
 
   .cc-header > div:first-child > a > div > div:nth-child(2) {
-    display: none;
+    font-size: 6px;
+    line-height: 1.1;
   }
 
   .cc-header nav {
@@ -1059,6 +1069,10 @@
 
   #home > div.relative.mx-auto.max-w-7xl > div.mt-5.grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #home > div.relative.mx-auto.max-w-7xl > div.grid {
+    min-height: 230px;
   }
 
   #home > div.relative.mx-auto.max-w-7xl > div.mt-5.grid > div {
